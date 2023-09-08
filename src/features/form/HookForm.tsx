@@ -1,3 +1,4 @@
+import { useForm } from "react-hook-form";
 import {
   FormErrorMessage,
   FormLabel,
@@ -7,11 +8,17 @@ import {
 } from "@chakra-ui/react";
 
 export default function HookForm() {
+  const { handleSubmit, register } = useForm();
+
   return (
-    <form>
+    <form
+      onSubmit={handleSubmit((data) => {
+        console.log(data);
+      })}
+    >
       <FormControl>
         <FormLabel htmlFor="name">First name</FormLabel>
-        <Input id="name" placeholder="name" />
+        <Input id="name" placeholder="name" {...register("name")} />
         <FormErrorMessage>
           <p> error placeholder</p>
         </FormErrorMessage>
