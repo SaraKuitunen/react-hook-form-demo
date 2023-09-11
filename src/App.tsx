@@ -17,7 +17,7 @@ function App() {
             <a href="https://chakra-ui.com/getting-started/with-hook-form">
               Chakra documentation
             </a>{" "}
-            which has issues because is actually JavaScript.
+            that is converted to TypeScript.
           </p>
           <HookFormChakraEx />
         </Box>

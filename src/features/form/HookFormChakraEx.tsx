@@ -7,15 +7,19 @@ import {
   Button,
 } from "@chakra-ui/react";
 
+interface FormData {
+  name: string;
+}
+
 export default function HookForm() {
   const {
     handleSubmit,
     register,
     formState: { errors, isSubmitting },
-  } = useForm();
+  } = useForm<FormData>(); // Specify the form data type
 
-  function onSubmit(values) {
-    return new Promise((resolve) => {
+  function onSubmit(values: FormData) {
+    return new Promise<void>((resolve) => {
       setTimeout(() => {
         alert(JSON.stringify(values, null, 2));
         resolve();
@@ -25,7 +29,8 @@ export default function HookForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <FormControl isInvalid={errors.name}>
+      <FormControl isInvalid={!!errors.name}>
+        {/* Check if errors.name has a message because in TypeScript, isInvalid prop expects a boolean*/}
         <FormLabel htmlFor="name">First name</FormLabel>
         <Input
           id="name"
